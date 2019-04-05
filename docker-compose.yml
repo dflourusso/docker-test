@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  demo-app:
+    image: jwilder/whoami
+    stop_grace_period: 30s
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      update_config:
+        failure_action: rollback
+        order: start-first
+      labels:
+        - traefik.enable=true
+        - traefik.frontend.rule=Host:docker.local
+        - traefik.port=8000
+        - traefik.docker.network=webgateway
+
+    networks:
+      - default
+      - traefik-public
+  
+  reverse-proxy:
+    image: traefik
+    command: 
+      - "--api"
+      - "--docker"
+      - "--docker.swarmMode"
+      - "--docker.domain=docker.local"
+      - "--docker.watch"
+      - "--docker.exposedbydefault=false"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+    networks:
+      - default
+      - traefik-public
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  traefik-public:
+    external: true
