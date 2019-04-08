@@ -29,6 +29,7 @@ systemctl start docker.service
 systemctl enable docker.service
 systemctl status docker.service
 sudo ln -s /usr/libexec/docker/docker-runc-current /usr/bin/docker-runc
+sudo ln -s /usr/libexec/docker/docker-proxy-current /usr/bin/docker-proxy
 systemctl restart docker.service
 ```
 
