@@ -41,7 +41,7 @@ Liberar porta no redhat para docker-machine
 ```
 sudo firewall-cmd --zone=public --add-port=2376/tcp --permanent
 sudo firewall-cmd --reload
-``
+```
 
 Verificar se a porta foi liberada
 ```
