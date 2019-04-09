@@ -9,14 +9,8 @@ subscription-manager register
 Find valid RHEL pool ID
 ```
 subscription-manager list --available
-```
-
-Attatch
-```
 subscription-manager attach --pool=pool_id
-```
 
-```
 subscription-manager repos --enable=rhel-7-server-rpms
 subscription-manager repos --enable=rhel-7-server-extras-rpms
 subscription-manager repos --enable=rhel-7-server-optional-rpms
@@ -31,6 +25,14 @@ systemctl status docker.service
 sudo ln -s /usr/libexec/docker/docker-runc-current /usr/bin/docker-runc
 sudo ln -s /usr/libexec/docker/docker-proxy-current /usr/bin/docker-proxy
 systemctl restart docker.service
+```
+
+Install docker compose
+[Docs](https://docs.docker.com/compose/install/)
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
 Test
