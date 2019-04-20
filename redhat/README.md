@@ -42,7 +42,7 @@ docker run alpine date
 
 Liberar porta no redhat para docker-machine
 ```
-firewall-cmd --add-port=2376/tcp --permanent
+firewall-cmd --zone=public --add-port=2376/tcp --permanent
 firewall-cmd --add-port=2377/tcp --permanent
 firewall-cmd --add-port=7946/tcp --permanent
 firewall-cmd --add-port=7946/udp --permanent
